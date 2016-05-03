@@ -1,5 +1,5 @@
 # redux-request
-:beginner: A redux middle for handling HTTP requests
+:beginner: A redux middleware for handling HTTP requests
 
 [![Build Status](https://travis-ci.org/jedirandy/redux-request.svg?branch=master)](https://travis-ci.org/jedirandy/redux-request)
 [![dependencies](https://david-dm.org/jedirandy/redux-request.svg)](https://david-dm.org/jedirandy/redux-request)
