@@ -3,15 +3,16 @@ module.exports = function(config) {
         browsers: ['PhantomJS'],
         singleRun: false,
         frameworks: ['mocha', 'chai', 'sinon'],
-        files: [{
-            pattern: 'test/**/*.spec.js', watched: false, included: true, served: true
-        }],
+        files: [
+            'test/*.spec.js'
+        ],
         preprocessors: {
             'test/**/*.js': ['webpack']
         },
         webpack: {
             devtool: 'inline-source-map',
             module: {
+                preLoaders: [],
                 loaders: [{
                     test: /\.js$/,
                     loader: 'babel-loader',

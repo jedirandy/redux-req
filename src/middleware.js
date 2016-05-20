@@ -3,24 +3,37 @@ export const ACTION_TYPE = 'REDUX_REQUEST';
 
 export const middleware = store => next => action => {
     if (action.type === ACTION_TYPE) {
+        let {
+            url,
+            method = 'GET',
+            payload,
+            requestType,
+            receiveType,
+            resourceName
+        } = action;
         let requestedAt = new Date();
         next({
-            type: action.requestType,
-            requestedAt: requestedAt
+            type: requestType,
+            requestedAt,
+            resourceName 
         });
-        return request(action.url, action.method, {
+        return request(url, method, {
+            payload,
             onSuccess: res => next({
-                type: action.receiveType,
+                type: receiveType,
                 error: false,
-                payload: res
+                payload: res,
+                requestedAt,
+                resourceName
             }),
             onFailure: err => next({
-                type: action.receiveType,
+                type: receiveType,
                 error: true,
                 payload: err,
-                requestedAt: requestedAt
+                requestedAt,
+                resourceName
             })
-        })
+        });
     } else {
         return next(action);
     }
