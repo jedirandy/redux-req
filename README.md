@@ -6,7 +6,7 @@ It's based on plain old XHR, though not as fancy as fetch, it simply does the jo
 [![Build Status](https://travis-ci.org/jedirandy/redux-request.svg?branch=master)](https://travis-ci.org/jedirandy/redux-request)
 [![dependencies](https://david-dm.org/jedirandy/redux-req.svg)](https://david-dm.org/jedirandy/redux-request)
 [![npm module](https://badge.fury.io/js/redux-req.svg)](https://www.npmjs.org/package/redux-request)
-[![codecov.io](https://codecov.io/github/jedirandy/redux-request/coverage.svg?branch=master)](https://codecov.io/github/jedirandy/redux-request?branch=master)
+[![codecov.io](https://codecov.io/github/jedirandy/redux-req/coverage.svg?branch=master)](https://codecov.io/github/jedirandy/redux-request?branch=master)
 
 ## Install
 ```bash
