@@ -1,6 +1,6 @@
 {
   "name": "redux-req",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "A redux middleware for handling HTTP requests",
   "main": "dist/index.js",
   "scripts": {
