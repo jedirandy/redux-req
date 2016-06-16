@@ -9,7 +9,8 @@ export const middleware = store => next => action => {
             payload,
             requestType,
             receiveType,
-            resourceName
+            resourceName,
+            beforeSend
         } = action;
         let requestedAt = new Date();
         next({
@@ -19,6 +20,7 @@ export const middleware = store => next => action => {
         });
         return request(url, method, {
             payload,
+            beforeSend,
             onSuccess: res => next({
                 type: receiveType,
                 error: false,

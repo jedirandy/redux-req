@@ -1,10 +1,14 @@
+const noop = () => {};
+
 export const request = (url, method, {
     payload,
     onSuccess,
-    onError
+    onError,
+    beforeSend = noop
 }) => {
     let xhr = new XMLHttpRequest();
     xhr.open(method, url, true);
+    beforeSend(xhr);
     xhr.send(payload);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4)

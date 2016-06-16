@@ -3,7 +3,7 @@
 
 It's based on plain old XHR, though not as fancy as fetch, it simply does the job and there's no need for extra dependencies.
 
-[![Build Status](https://travis-ci.org/jedirandy/redux-request.svg?branch=master)](https://travis-ci.org/jedirandy/redux-request)
+[![Build Status](https://travis-ci.org/jedirandy/redux-req.svg?branch=master)](https://travis-ci.org/jedirandy/redux-req)
 [![dependencies](https://david-dm.org/jedirandy/redux-req.svg)](https://david-dm.org/jedirandy/redux-req)
 [![npm module](https://badge.fury.io/js/redux-req.svg)](https://www.npmjs.org/package/redux-req)
 [![codecov.io](https://codecov.io/github/jedirandy/redux-req/coverage.svg?branch=master)](https://codecov.io/github/jedirandy/redux-req?branch=master)
@@ -43,6 +43,7 @@ To dispatch a request middleware aware action, the action should have the follow
 | url | string | the url of the resource |
 | method | string | the method of the request |
 | payload | any | the request payload |
+| beforeSend | function | a function passed with the XHR object, so that some extra work can be done before sending the request |
 
 ## License
 MIT
