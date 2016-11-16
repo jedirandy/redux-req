@@ -16,7 +16,7 @@ export const middleware = store => next => action => {
         next({
             type: requestType,
             requestedAt,
-            resourceName 
+            resourceName
         });
         return request(url, method, {
             payload,
