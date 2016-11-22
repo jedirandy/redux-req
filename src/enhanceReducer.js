@@ -1,4 +1,4 @@
-const enhanceReducer = (reducer, options = {}) => {
+export const enhanceReducer = (reducer, options = {}) => {
     const initState = {
         ...reducer(undefined, {}),
         ...{
@@ -12,30 +12,25 @@ const enhanceReducer = (reducer, options = {}) => {
     return (state = initState, action) => {
         if (action.type === requestType)
             return {
-                ...state,
+                ...reducer(state, action),
                 ...{
                     isFetching: true,
                     error: null,
                 }
             };
-        if (action.type === receiveType && action.hasError)
-            return {
-                ...state,
-                ...{
-                    isFetching: false,
-                    error: action.payload
-                }
-            };
-        if (action.type === receiveType)
+        if (action.type === receiveType) {
+            // ignore older requests
+            if (state.requestedAt > action.requestedAt)
+                return state;
             return {
                 ...reducer(state, action),
                 ...{
                     isFetching: false,
-                    error: null
+                    error: action.hasError ? action.payload : null
                 }
             };
-        const nextState = reducer(state, action);
-        return nextState;
+        }
+        return reducer(state, action);
     }
 }
 

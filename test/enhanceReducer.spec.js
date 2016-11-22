@@ -49,4 +49,21 @@ describe('reducer enhancer', () => {
         });
         expect(state.data).to.equal('some data');
     });
+    it('abadon receive action if a later request action exists', () => {
+        const enhanced = enhanceReducer(reducer, {
+            requestType: 'REQUEST',
+            receiveType: 'RECEIVE',
+        });
+        const state = enhanced({
+            isFetching: false,
+            requestedAt: new Date(1000, 1, 2),
+            data: 'new data'
+        }, {
+            type: 'RECEIVE',
+            hasError: false,
+            payload: 'expired data',
+            requestedAt: new Date(1000, 1, 1)
+        });
+        expect(state.data).to.equal('new data');
+    });
 });

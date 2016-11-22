@@ -91,6 +91,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 
+	var _enhanceReducer = __webpack_require__(4);
+
+	Object.keys(_enhanceReducer).forEach(function (key) {
+	  if (key === "default") return;
+	  Object.defineProperty(exports, key, {
+	    enumerable: true,
+	    get: function get() {
+	      return _enhanceReducer[key];
+	    }
+	  });
+	});
+
 /***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
@@ -196,6 +208,51 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	exports.default = request;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var enhanceReducer = exports.enhanceReducer = function enhanceReducer(reducer) {
+	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+	    var initState = _extends({}, reducer(undefined, {}), {
+	        isFetching: true,
+	        error: null,
+	        requestedAt: new Date()
+	    });
+
+	    var requestType = options.requestType;
+	    var receiveType = options.receiveType;
+
+	    return function () {
+	        var state = arguments.length <= 0 || arguments[0] === undefined ? initState : arguments[0];
+	        var action = arguments[1];
+
+	        if (action.type === requestType) return _extends({}, reducer(state, action), {
+	            isFetching: true,
+	            error: null
+	        });
+	        if (action.type === receiveType) {
+	            if (state.requestedAt > action.requestedAt) return state;
+	            return _extends({}, reducer(state, action), {
+	                isFetching: false,
+	                error: action.hasError ? action.payload : null
+	            });
+	        }
+	        return reducer(state, action);
+	    };
+	};
+
+	exports.default = enhanceReducer;
 
 /***/ }
 /******/ ])

@@ -16,7 +16,7 @@ npm install redux-req
 ## A quick example
 
 ```javascript
-import {ACTION_TYPE} from 'redux-request';
+import { ACTION_TYPE } from 'redux-request';
 
 // dispatch an API request
 dispatch({
@@ -44,6 +44,25 @@ To dispatch a request middleware aware action, the action should have the follow
 | method | string | the method of the request |
 | payload | any | the request payload |
 | beforeSend | function | a function passed with the XHR object, so that some extra work can be done before sending the request |
+
+## Reducer enhancer
+
+To simplify the creation of reducer that can interpret the actions emitted by the middleware, a reducer enhancer is also delivered with the package, here's an example:
+
+```javascript
+import { enhanceReducer } from 'redux-req';
+
+const enhanced = enhanceReducer(a_reducer);
+```
+
+then the state will be injected with the following properties according to the request result.
+
+```javascript
+{
+    isFetching: boolean,
+    error: any // payload from the failed request, null if there's no error
+}
+```
 
 ## License
 MIT
